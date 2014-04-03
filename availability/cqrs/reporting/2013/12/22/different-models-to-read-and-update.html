@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Why do we have different models to read and update data? aka CQRS</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">Sripathi's Blog</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>Why do we have different models to read and update data? aka CQRS</h2>
+<p class="meta">22 Dec 2013</p>
+
+<div class="post">
+<p>In a few projects, we have kept the data update mechanism different from the data read mechanism. </p>
+
+<p>Some Examples :
+1. In FreshersWorld, data is read/queried from a SOLR database, but is primarily updated in MySQL.
+2. In Comcast/Lithium, data is inserted using Django ORM models. But data reads are done using SQL and a smallish reporting framework we built internally, instead of using django models directly.</p>
+
+<p>The simple reason is that each user interface needs a different view of the same underlying data. This is actually a design pattern for this, and its called Command Query Responsibility Segregation, or CQRS. </p>
+
+<p>Yes, it has its drawbacks - keeping data consistent is a real problem, and the complexity isn&#39;t always worth it. As always, the hardest part is deciding if this pattern really applies to your problem.</p>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Sripathi Krishnan<br />
+                Director Engineering At <a href="http://hashedin.com/">HashedIn Technologies</a><br />
+                sripathi at hashedin.com
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/sripathikrishnan">github.com/sripathikrishnan</a><br />
+                <a href="https://twitter.com/srithedabbler">twitter.com/srithedabbler</a><br />
+                <a href="http://in.linkedin.com/in/sripathikrishnan">LinkedIn</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+
+    </body>
+</html>

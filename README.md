@@ -1,4 +1,4 @@
-sripathikrishnan.github.io
-==========================
+blog
+====
 
-Collection of emails that may be useful for others
+Source for my blog

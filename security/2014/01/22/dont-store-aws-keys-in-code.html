@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Don't store AWS Access Keys in code -- use Instance Profile Roles instead</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">Sripathi's Blog</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>Don't store AWS Access Keys in code -- use Instance Profile Roles instead</h2>
+<p class="meta">22 Jan 2014</p>
+
+<div class="post">
+<p>A common use case is calling an AWS API from an EC2 instance using a library like boto. For example, you may want to upload files to S3 from an EC2 machine. To do so, you require AWS access keys and secret keys..</p>
+
+<p>The usual approach is to ask Pradeep to generate keys, and then store these keys in settings files. This is a bad practice, because anyone who has access to the source code can now make API calls directly. </p>
+
+<p>Solution :
+1. Create a unique IAM role for your application. Example : securecpa<em>webserver</em>dev or lithium<em>jobserver</em>prod
+2. Assign this role to the EC2 instance when you boot the machine.
+3. When you use boto, don&#39;t pass the credentials. boto is intelligent enough to find the temporary credentials.</p>
+
+<p>Wrong : boto.connect<em>s3(settings.access</em>key, settings.secret<em>accesskey)
+Right   : boto.connect</em>s3()</p>
+
+<p>As a process, Pradeep and team will always do steps 1 and 2 for you. The role initially will not have any permissions. As a developer, you must request specific permissions you want for the role.</p>
+
+<p>Appendix :
+* Instance Profile Documentation - http://docs.aws.amazon.com/IAM/latest/UserGuide/role-usecase-ec2app.html
+* How Boto searches for credentials - https://github.com/boto/boto/tree/develop/boto/core</p>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Sripathi Krishnan<br />
+                Director Engineering At <a href="http://hashedin.com/">HashedIn Technologies</a><br />
+                sripathi at hashedin.com
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/sripathikrishnan">github.com/sripathikrishnan</a><br />
+                <a href="https://twitter.com/srithedabbler">twitter.com/srithedabbler</a><br />
+                <a href="http://in.linkedin.com/in/sripathikrishnan">LinkedIn</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+
+    </body>
+</html>

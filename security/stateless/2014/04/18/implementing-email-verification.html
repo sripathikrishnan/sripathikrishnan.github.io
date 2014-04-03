@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Stateless Email Verification</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">Sripathi's Blog</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>Stateless Email Verification</h2>
+<p class="meta">18 Apr 2014</p>
+
+<div class="post">
+<p>My preference has always been stateless approach, but the approach mentioned needs a bit more work. You want the link to expire in some time - so when you generate the signature, you append a timestamp into it as well. </p>
+
+<p>Stateless email verification should be something like this - </p>
+
+<ol>
+<li>Make a JSON Object with {&quot;email&quot;: &quot;sripathi@kickdrumtech.com&quot;, &quot;timestamp&quot;: &quot;1395139162&quot;}</li>
+<li>Base64 encode JSON Object with URL Safe Encoder. Call the string as &quot;payload&quot;</li>
+<li>Compute a signature, which is SHA1(payload + secret key). MD5 is also fine for this purpose.</li>
+<li>Generate a link - https://example.com/verify_email?payload=<payload>&amp;signature=<signature> and email the user.</li>
+<li>When the user clicks the link, extract the payload and verify the signature. If signature mismatch - raise hell</li>
+<li>Extract timestamp and verify it hasn&#39;t expired</li>
+<li>Finally, confirm the email. Optionally, log in the database when the email was confirmed.</li>
+</ol>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Sripathi Krishnan<br />
+                Director Engineering At <a href="http://hashedin.com/">HashedIn Technologies</a><br />
+                sripathi at hashedin.com
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/sripathikrishnan">github.com/sripathikrishnan</a><br />
+                <a href="https://twitter.com/srithedabbler">twitter.com/srithedabbler</a><br />
+                <a href="http://in.linkedin.com/in/sripathikrishnan">LinkedIn</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+
+    </body>
+</html>
